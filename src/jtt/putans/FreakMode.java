@@ -52,7 +52,7 @@ public class FreakMode extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-	    // Base URL for the API
+	    // Base URL for the APIs
 		//this url is for a random card - https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1&offset=0&sort=random&cachebust
 	    String apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1&offset=0&sort=random&cachebust";
 

@@ -13,7 +13,7 @@ public class MainClass {
 	    // Base URL for the API
 	    String apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Pot%20Of%20Greed";
 
-	    // Create an HttpClient
+	    // Create an HttpClienta
 	    HttpClient client = HttpClient.newHttpClient();
 	    
 	    // Create a request
