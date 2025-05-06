@@ -72,7 +72,7 @@ public class FreakMode extends JFrame {
             // Parse the JSON data
             JSONObject jsonObject = new JSONObject(jsonResponse);
             
-            // For demonstration, let's print out the card name and other info
+            // For demonstration, let's priant out the card name and other info
             System.out.println("Card Name: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("name"));
             System.out.println("Type: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("type"));
             System.out.println("Description: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("desc"));
