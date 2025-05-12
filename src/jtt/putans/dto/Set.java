@@ -3,9 +3,9 @@ package jtt.putans.dto;
 import java.sql.Date;
 
 public class Set {
-String name;
-String code;
-Date release_date;
+private String name;
+private String code;
+private Date release_date;
 
 public Set(String name, String code, Date release_date) {
 	this.name = name;
