@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 public class FreakMode extends JFrame {
 
@@ -59,15 +60,9 @@ public class FreakMode extends JFrame {
 		
 		JLabel nameL = new JLabel("");
 		nameL.setHorizontalAlignment(SwingConstants.CENTER);
-		nameL.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		nameL.setBounds(619, 11, 613, 130);
+		nameL.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		nameL.setBounds(588, 11, 830, 130);
 		contentPane.add(nameL);
-		
-		JLabel descL = new JLabel("Description: ");
-		descL.setVerticalAlignment(SwingConstants.TOP);
-		descL.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		descL.setBounds(605, 152, 627, 211);
-		contentPane.add(descL);
 		
 		JLabel attributeL = new JLabel("Attribute: ");
 		attributeL.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -76,39 +71,47 @@ public class FreakMode extends JFrame {
 		
 		JLabel raceL = new JLabel("Race: ");
 		raceL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		raceL.setBounds(605, 451, 218, 66);
+		raceL.setBounds(605, 451, 308, 66);
 		contentPane.add(raceL);
 		
 		JLabel typeL = new JLabel("Type: ");
 		typeL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		typeL.setBounds(605, 374, 218, 66);
+		typeL.setBounds(605, 374, 296, 66);
 		contentPane.add(typeL);
 		
 		JLabel archL = new JLabel("Archetype: ");
 		archL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		archL.setBounds(605, 605, 218, 66);
+		archL.setBounds(605, 605, 225, 66);
 		contentPane.add(archL);
 		
 		JLabel atkL = new JLabel("ATK: ");
 		atkL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		atkL.setBounds(917, 374, 218, 66);
+		atkL.setBounds(951, 374, 156, 66);
 		contentPane.add(atkL);
 		
 		JLabel defL = new JLabel("DEF: ");
 		defL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		defL.setBounds(917, 451, 218, 66);
+		defL.setBounds(951, 451, 156, 66);
 		contentPane.add(defL);
 		
 		JLabel lvlL = new JLabel("Level: ");
 		lvlL.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lvlL.setBounds(917, 528, 218, 66);
+		lvlL.setBounds(951, 528, 156, 66);
 		contentPane.add(lvlL);
 		
-		JLabel lblSetsTheCard = new JLabel("Sets the card is in: \\n");
-		lblSetsTheCard.setVerticalAlignment(SwingConstants.TOP);
-		lblSetsTheCard.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSetsTheCard.setBounds(1145, 374, 278, 353);
-		contentPane.add(lblSetsTheCard);
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		textArea.setWrapStyleWord(true);
+		textArea.setBounds(598, 113, 753, 244);
+		contentPane.add(textArea);
+		
+		JTextArea textArea_1 = new JTextArea("Sets: ");
+		textArea_1.setLineWrap(true);
+		textArea_1.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		textArea_1.setWrapStyleWord(true);
+		textArea_1.setBounds(1121, 374, 314, 338);
+		contentPane.add(textArea_1);
 		
 	    // Base URL for the APIs
 		//this url is for a random card - https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1&offset=0&sort=random&cachebust
@@ -131,20 +134,43 @@ public class FreakMode extends JFrame {
             JSONObject jsonObject = new JSONObject(jsonResponse);
             
             // For demonstration, let's priant out the card name and other info
-            System.out.println("Card Name: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("name"));
-            nameL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("name"));
-            System.out.println("Type: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("type"));
-            typeL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("type"));
-            System.out.println("Description: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("desc"));
-            descL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("desc"));
-            System.out.println("Attribute: " + jsonObject.getJSONArray("data").getJSONObject(0).getString("attribute"));
-            attributeL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("attribute"));
-            raceL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("race"));
-            archL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("archetype"));
-            atkL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("atk"));
-            defL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("def"));
-            lvlL.setText(jsonObject.getJSONArray("data").getJSONObject(0).getString("level"));
+            String desc = jsonObject.getJSONArray("data").getJSONObject(0).getString("desc");
+            String name = jsonObject.getJSONArray("data").getJSONObject(0).getString("name");
+            System.out.println(name);
+            String type = jsonObject.getJSONArray("data").getJSONObject(0).getString("type");
+            String attribute = "null";
+            if(jsonObject.getJSONArray("data").getJSONObject(0).has("attribute")) {
+            	attribute = jsonObject.getJSONArray("data").getJSONObject(0).getString("attribute");
+            }
+            String race = jsonObject.getJSONArray("data").getJSONObject(0).getString("race");
+            String archetype = "null";
+            int atk = 0;
+            int def = 0;
+            int level = 0;
+            if(jsonObject.getJSONArray("data").getJSONObject(0).has("archetype")) {
+            	archetype = jsonObject.getJSONArray("data").getJSONObject(0).getString("archetype");
+            }
+            if(jsonObject.getJSONArray("data").getJSONObject(0).has("atk")) {
+            atk = jsonObject.getJSONArray("data").getJSONObject(0).getInt("atk");
+            def = jsonObject.getJSONArray("data").getJSONObject(0).getInt("def");
+            level = jsonObject.getJSONArray("data").getJSONObject(0).getInt("level");
+            }
+            
+            System.out.println("Card Name: " + name);
+            nameL.setText("Card Name: " + name);
+            System.out.println("Type: " + type);
+            typeL.setText("Type: " + type);
+            System.out.println("Description: " + desc);
+            textArea.setText("Description: " + desc);
+            System.out.println("Attribute: " + attribute);
+            attributeL.setText("Attribute: " + attribute);
+            raceL.setText("Race: " + race);
+            archL.setText("Archetype: " + archetype);
+            atkL.setText("ATK: " + String.valueOf(atk));
+            defL.setText("DEF: " + String.valueOf(def));
+            lvlL.setText("Level: " + String.valueOf(level));
             System.out.println("Set names: ");
+            if(jsonObject.getJSONArray("data").getJSONObject(0).has("card_sets")) {
             JSONArray j = jsonObject.getJSONArray("data").getJSONObject(0).getJSONArray("card_sets");
             List<String> setUrls = new ArrayList<>();
             for (int i = 0; i < j.length(); i++) {
@@ -156,7 +182,7 @@ public class FreakMode extends JFrame {
     		JLabel lblNewLabel = new JLabel(new ImageIcon(scaledImage));;
     		lblNewLabel.setBounds(38, 11, 470, 575);
     		contentPane.add(lblNewLabel);
-
+    		String set = "Sets: ";
     	    for (String s : setUrls) {
         	    HttpRequest requestSet = HttpRequest.newBuilder()
             	        .uri(URI.create("https://db.ygoprodeck.com/api/v7/cardsetsinfo.php?setcode=" + s))
@@ -169,10 +195,15 @@ public class FreakMode extends JFrame {
                 
                 // Parse the JSON data
                 JSONObject jsonObjectSet = new JSONObject(jsonResponseSet);
-
+                String one = "";
+                
                 System.out.println(jsonObjectSet.getString("set_name"));
-                lblSetsTheCard.setText(jsonObjectSet.getString("set_name"));
+                one = jsonObjectSet.getString("set_name");
+                set = set +"\n" + one;
+                
 			}
+    	    textArea_1.setText(set);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
