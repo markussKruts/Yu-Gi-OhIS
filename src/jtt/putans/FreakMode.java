@@ -103,6 +103,7 @@ public class FreakMode extends JFrame {
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		textArea.setWrapStyleWord(true);
+		textArea.setEditable(false);
 		textArea.setBounds(598, 113, 753, 244);
 		contentPane.add(textArea);
 		
@@ -110,6 +111,7 @@ public class FreakMode extends JFrame {
 		textArea_1.setLineWrap(true);
 		textArea_1.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		textArea_1.setWrapStyleWord(true);
+		textArea_1.setEditable(false);
 		textArea_1.setBounds(1121, 374, 314, 338);
 		contentPane.add(textArea_1);
 		
@@ -198,7 +200,7 @@ public class FreakMode extends JFrame {
                 String one = "";
                 
                 System.out.println(jsonObjectSet.getString("set_name"));
-                one = jsonObjectSet.getString("set_name");
+                one = jsonObjectSet.getString("set_name") + " (" + jsonObjectSet.getString("set_code") +")";
                 set = set +"\n" + one;
                 
 			}
