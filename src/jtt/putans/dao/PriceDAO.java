@@ -9,4 +9,5 @@ import jtt.putans.dto.Price;
 public interface  PriceDAO extends GenericDAO<Price> {
 	final String TABLE = "price";
 	Price getByCard(Card card) throws SQLException;
+	Price getByPrice(int price) throws SQLException;
 }
